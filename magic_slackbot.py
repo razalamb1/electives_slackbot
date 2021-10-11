@@ -14,12 +14,18 @@ app = Flask(__name__)
 slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
 # need to set up the slack events to use Flask web server (where we send the events to)
 
+@app.route('/')
+def hello():
+    """Return a friendly HTTP greeting."""
+    print("I am inside hello world")
+    return 'Hello World! I can make change at route: /change'
 
 # loads environment variables from the .env file
 client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 client.chat_postMessage(channel='#general', text='Hola! Yes, I am alive here too')
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
     # will this thing run in default port, 5000?
     # if I save this file, modify it, I dont need to run the python script again. It will automatically update the web server
