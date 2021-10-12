@@ -13,21 +13,22 @@ load_dotenv(dotenv_path=env_path)
 
 app = Flask(__name__)
 
+print(f"Slack Token is {os.environ['SLACK_TOKEN']}")
 
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
     print("I am inside hello world")
-    return 'Hello World! I can make change at route: /change'
+    return 'Hello World!'
 
 
 # need to set up the slack events to use Flask web server (where we send the events to)
-slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
+# slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
 
 
 
-client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
-client.chat_postMessage(channel='#general', text='Hola! Yes, I am alive here too')
+# client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
+# client.chat_postMessage(channel='#general', text='Hola! Yes, I am alive here too')
 
 
 if __name__ == "__main__":
