@@ -6,6 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from flask import Flask
 from slackeventsapi import SlackEventAdapter
+from flask import jsonify
 
 # loads environment variables from the .env file
 env_path = Path('.') / '.env'
@@ -21,6 +22,10 @@ def hello():
     print("I am inside hello world")
     return 'Hello World!'
 
+@app.route('/slack/<msg>')
+def send(msg):
+    print(f"Send message {msg}")
+    return jsonify(msg)
 
 # need to set up the slack events to use Flask web server (where we send the events to)
 # slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
@@ -32,6 +37,6 @@ def hello():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host='0.0.0.0')
     # will this thing run in default port, 5000?
     # "debug" : if I save this file, modify it, I dont need to run the python script again. It will automatically update the web server
