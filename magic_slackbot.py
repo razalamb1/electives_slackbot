@@ -15,6 +15,9 @@ load_dotenv(dotenv_path=env_path)
 app = Flask(__name__)
 
 print(f"Slack Token is {os.environ['SLACK_TOKEN']}")
+slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
+client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
+
 
 @app.route('/')
 def hello():
@@ -27,13 +30,14 @@ def send(msg):
     print(f"Send message {msg}")
     return jsonify(msg)
 
-# need to set up the slack events to use Flask web server (where we send the events to)
-# slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
+@app.route('/slack2/<msg>')
+def send2(msg):
+    print(f"Send message {msg}")
+    client.chat_postMessage(channel='#general', text=f'{msg}')
+    return jsonify(msg)
+    
 
-
-
-# client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
-# client.chat_postMessage(channel='#general', text='Hola! Yes, I am alive here too')
+client.chat_postMessage(channel='#general', text='Hola! Yes, I am alive here too')
 
 
 if __name__ == "__main__":
