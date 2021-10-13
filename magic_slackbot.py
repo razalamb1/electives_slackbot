@@ -14,30 +14,42 @@ load_dotenv(dotenv_path=env_path)
 
 app = Flask(__name__)
 
-print(f"Slack Token is {os.environ['SLACK_TOKEN']}")
+
 slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
 client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
+BOT_ID = client.api_call("auth.test")['user_id']
 
 
+# ______________________________________ For testing purposes _________________________________________
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
     print("I am inside hello world")
     return 'Hello World!'
 
-@app.route('/slack/<msg>')
-def send(msg):
-    print(f"Send message {msg}")
-    return jsonify(msg)
 
 @app.route('/slack2/<msg>')
 def send2(msg):
     print(f"Send message {msg}")
     client.chat_postMessage(channel='#general', text=f'{msg}')
     return jsonify(msg)
-    
+ 
+# ______________________________________________________________________________________________________ 
+ 
+ 
+# HANDLING MESSAGES
+# This is the route that will collect variables and handle message payload:
 
-client.chat_postMessage(channel='#general', text='Hola! Yes, I am alive here too')
+@slack_event_adapter.on('message')
+def message(payload):
+    """ This is trying to capture whatever is in the EVENT in the message.channel payload, otherwise assigns an empty dictionary {} """
+    event = payload.get('event', {}) 
+    channel_id = event.get('channel')
+    user_id = event.get('user')
+    if BOT_ID != user_id:
+        client.chat_postMessage(channel=channel_id, text='Hola! I am alive, but I do not understand your message yet. Please donate $1000 to @clarissaache so I can learn how chat')
+
+
 
 
 if __name__ == "__main__":
