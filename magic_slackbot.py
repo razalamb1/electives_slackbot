@@ -4,7 +4,7 @@ import slack
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, Response, request 
 from slackeventsapi import SlackEventAdapter
 from flask import jsonify
 
@@ -49,6 +49,11 @@ def message(payload):
     if BOT_ID != user_id:
         client.chat_postMessage(channel=channel_id, text='Hola! I am alive, but I do not understand your message yet. Please donate $1000 to @clarissaache so I can learn how chat')
 
+#HANDLING EVENTS
+# Status 200 means "all good"
+@app.route('/class')
+def class():
+    return Response(), 200
 
 
 
