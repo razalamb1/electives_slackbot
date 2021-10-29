@@ -61,7 +61,8 @@ def elective():
     user_id = data.get('used_id')
     channel_id = data.get('channel_id')
     text = data.get('text')
-    client.chat_postMessage(channel=channel_id, text='I got your command. We are working on giving you a summary of all the feedback from students who have taken this class')
+    class_feedback = test_electives.get(text,0)
+    client.chat_postMessage(channel=channel_id, text=f'Someone took this class and said: {class_feedback}')
     return Response(), 200
 
 
