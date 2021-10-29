@@ -15,7 +15,7 @@ load_dotenv(dotenv_path=env_path)
 app = Flask(__name__)
 
 
-test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them',2: 'For', 3: 'Geeks'}
+test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them'}
 
 
 
@@ -51,11 +51,11 @@ def message(payload):
     channel_id = event.get('channel')
     user_id = event.get('user')
     if BOT_ID != user_id:
-        client.chat_postMessage(channel=channel_id, text='Hola! I am alive, but I do not understand your message yet. Please donate $1000 to @clarissaache so I can learn how chat')
+        client.chat_postMessage(channel=channel_id, text='Hola! I do not understand your message yet. Please donate $1000 to @clarissaache so I can learn how chat')
 
 #HANDLING EVENTS
 # Status 200 means "all good"
-@app.route('/elective', methods=['GET', "POST"])
+@app.route('/elective', methods=['POST'])
 def elective():
     data = request.form
     user_id = data.get('used_id')
