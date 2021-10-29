@@ -15,6 +15,10 @@ load_dotenv(dotenv_path=env_path)
 app = Flask(__name__)
 
 
+test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them',2: 'For', 3: 'Geeks'}
+
+
+
 slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
 client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 BOT_ID = client.api_call("auth.test")['user_id']
@@ -51,8 +55,13 @@ def message(payload):
 
 #HANDLING EVENTS
 # Status 200 means "all good"
-@app.route('/class')
-def class():
+@app.route('/elective', methods=['GET', "POST"])
+def elective():
+    data = request.form
+    user_id = data.get('used_id')
+    channel_id = data.get('channel_id')
+    text = data.get('text')
+    client.chat_postMessage(channel=channel_id, text='I got your command. We are working on giving you a summary of all the feedback from students who have taken this class')
     return Response(), 200
 
 
