@@ -1,0 +1,21 @@
+from pprint import pprint
+import boto3
+from botocore.exceptions import ClientError
+
+def get_movie(title, dynamodb=None):
+    if not dynamodb:
+        dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+
+    table = dynamodb.Table('MIDS')
+
+    try:
+        response = table.batch_get_items(Key={'class_number': title})
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+    else:
+        return response['Item']
+
+if __name__ == '__main__':
+    movie = get_movie("IDS 602")
+    print(movie)
+   
