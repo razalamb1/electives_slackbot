@@ -17,10 +17,8 @@ load_dotenv(dotenv_path=env_path)
 app = Flask(__name__)
 
 
-test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them'}
+# test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them'}
 
-region='us-east-1'
-dyn = boto3.client('dynamodb', region_name=region)
 
 
 slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
