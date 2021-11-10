@@ -17,7 +17,7 @@ load_dotenv(dotenv_path=env_path)
 app = Flask(__name__)
 
 
-# test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them'}
+#test_electives = {'IDS601': 'Took with Akande, goes fast throughout the whole semester. Be familiar with distributions and how to manipulate them'}
 
 
 
