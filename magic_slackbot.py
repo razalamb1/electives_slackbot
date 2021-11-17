@@ -41,7 +41,14 @@ def send2(msg):
     print(f"Send message {msg}")
     client.chat_postMessage(channel='#general', text=f'{msg}')
     return jsonify(msg)
- 
+
+@app.route('/dynamo/<msg2>')
+def send3(msg2):
+    print(f"Send message dynamodb {msg2}")
+    class_feedback = query_table(msg2)
+    print_statements = digest(class_feedback)
+    return jsonify(print_statements)
+  
 # ______________________________________________________________________________________________________ 
 # QUERYING TABLES
  
