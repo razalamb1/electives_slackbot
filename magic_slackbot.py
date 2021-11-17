@@ -44,8 +44,9 @@ def send2(msg):
 
 @app.route('/dynamo/<msg2>')
 def send3(msg2):
+    text = 'IDS 602'
     print(f"Send message dynamodb {msg2}")
-    class_feedback = query_table(msg2)
+    class_feedback = query_table(text)
     print_statements = digest(class_feedback)
     return jsonify(print_statements)
   
