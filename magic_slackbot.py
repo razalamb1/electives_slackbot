@@ -24,7 +24,8 @@ app = Flask(__name__)
 slack_event_adapter = SlackEventAdapter(os.environ['SIGNING_SECRET'], '/slack/events', app)
 client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 BOT_ID = client.api_call("auth.test")['user_id']
-
+ACCESS_KEY = os.environ['ACCESS_KEY']
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # ______________________________________ For testing purposes _________________________________________
 
@@ -45,7 +46,7 @@ def send2(msg):
 # QUERYING TABLES
  
 def query_table(class_number):
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-2', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
     table = dynamodb.Table('MIDS')
     response = table.query(
         KeyConditionExpression=Key('class_number').eq(class_number)
@@ -94,7 +95,7 @@ def elective():
     class_feedback = query_table(text)
     print_statements = digest(class_feedback)
     for i in print_statements:
-            client.chat_postMessage(channel=channel_id, text=i)
+        client.chat_postMessage(channel=channel_id, text=i)
     return Response(), 200
 
 
