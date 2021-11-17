@@ -47,10 +47,12 @@ def send2(msg):
  
 def query_table(class_number):
     dynamodb = boto3.resource('dynamodb', region_name='us-east-2', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+    print(class_number)
     table = dynamodb.Table('MIDS')
     response = table.query(
         KeyConditionExpression=Key('class_number').eq(class_number)
     )
+    print(response['Items'])
     return response['Items']
     
 def digest(class_feedback):
@@ -91,9 +93,11 @@ def elective():
     user_id = data.get('used_id')
     channel_id = data.get('channel_id')
     text = data.get('text')
+    print(text)
     #class_feedback = test_electives.get(text,0)
     class_feedback = query_table(text)
     print_statements = digest(class_feedback)
+    print(print_statements)
     for i in print_statements:
         client.chat_postMessage(channel=channel_id, text=i)
     return Response(), 200
