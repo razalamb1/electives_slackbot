@@ -56,7 +56,7 @@ def send3(msg2):
 def query_table(class_number):
     dynamodb = boto3.resource('dynamodb', region_name='us-east-2', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
     print(class_number)
-    table = dynamodb.Table('MIDS')
+    table = dynamodb.Table('CLASSES')
     response = table.query(
         KeyConditionExpression=Key('class_name').eq(class_number)
     )
@@ -117,7 +117,7 @@ def addfeedback():
     channel_id = data.get('channel_id')
     text = data.get('text')
     print(text) #"Clarissa Ache, IDS 405, I hated this class, 1"
-    feedback_list = text.split(', ')
+    feedback_list = text.split('; ')
     feedback_dict = {'student_name': feedback_list[0], 'class_name': feedback_list[1], 'feedback': feedback_list[2], 'rating': feedback_list[3]}
     send_to_dynamo(feedback_dict)
     client.chat_postMessage(channel=channel_id, text="Your feedback has been recorded. You are loved and your feelings are valid.")
