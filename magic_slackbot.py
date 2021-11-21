@@ -64,7 +64,7 @@ def query_table(class_number):
     return response['Items']
     
 def digest(class_feedback):
-    number_statement = f'There are {len(class_feedback)} students in MIDS who have taken this elective.'
+    number_statement = f'{len(class_feedback)} students in MIDS have taken this elective.'
     participants = []
     feedback = []
     for i in class_feedback:
@@ -91,7 +91,7 @@ def message(payload):
     channel_id = event.get('channel')
     user_id = event.get('user')
     if BOT_ID != user_id:
-        client.chat_postMessage(channel=channel_id, text='Please contact Noah Gift for help')
+        client.chat_postMessage(channel=channel_id, text='Welcome to YourMidsFriend, the slackbot that helps you decide which electives to take. Please use the slash function /elective to see feedback on a course, and use the slash function /addfeedback to add your feedback for an elective.')
 
 #HANDLING EVENTS
 # Status 200 means "all good"
