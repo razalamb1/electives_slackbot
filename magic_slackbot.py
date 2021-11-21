@@ -124,7 +124,7 @@ def addfeedback():
     return Response(), 200
 
 def send_to_dynamo(feedback_dict):
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-2',aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
     table = dynamodb.Table('CLASSES')
     response = table.put_item(
        Item = feedback_dict
