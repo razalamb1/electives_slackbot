@@ -58,7 +58,7 @@ def query_table(class_number):
     print(class_number)
     table = dynamodb.Table('MIDS')
     response = table.query(
-        KeyConditionExpression=Key('class_number').eq(class_number)
+        KeyConditionExpression=Key('class_name').eq(class_number)
     )
     print(response['Items'])
     return response['Items']
@@ -109,6 +109,27 @@ def elective():
     for i in print_statements:
         client.chat_postMessage(channel=channel_id, text=i)
     return Response(), 200
+    
+#@app.route('/addfeedback', methods=['POST'])
+def addfeedback():
+    data = request.form
+    user_id = data.get('used_id')
+    channel_id = data.get('channel_id')
+    text = data.get('text')
+    print(text) #"Clarissa Ache, IDS 405, I hated this class, 1"
+    feedback_list = text.split(', ')
+    feedback_dict = {'student_name': feedback_list[0], 'class_name': feedback_list[1], 'feedback': feedback_list[2], 'rating': feedback_list[3]}
+    send_to_dynamo(feedback_dict)
+    client.chat_postMessage(channel=channel_id, text="Your feedback has been recorded. You are loved and your feelings are valid.")
+    return Response(), 200
+
+def send_to_dynamo(feedback_dict):
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+    table = dynamodb.Table('CLASSES')
+    response = table.put_item(
+       Item = feedback_dict
+    )
+    pass
 
 
 
