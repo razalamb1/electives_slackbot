@@ -110,7 +110,7 @@ def elective():
         client.chat_postMessage(channel=channel_id, text=i)
     return Response(), 200
     
-#@app.route('/addfeedback', methods=['POST'])
+@app.route('/addfeedback', methods=['POST'])
 def addfeedback():
     data = request.form
     user_id = data.get('used_id')
