@@ -4,7 +4,7 @@
 
 Duke’s Masters in Interdisciplinary Data Science (MIDS) is a relatively new 2 year-long graduate science program. One of the strengths of the program is the ability for students to take electives in any of Duke’s graduate schools. However, this leads to a somewhat predictable and simultaneously frustrating question: “What gosh-darn elective do I take??” As a solution, the program administrator has put together a Google Sheet for students to add courses they have taken and any relevant feedback. However, as visible below, this spreadsheet can be very difficult to use, as there’s no easy sort functionality, and students may enter classes with slightly different names.
 
-
+![alt text](https://user-images.githubusercontent.com/87722995/145470902-da838981-871b-454c-b72f-7e999e52b458.png)
 
 The purpose of this project is to rectify this issue, and provide an easy platform for current students to both view and add feedback on electives they have taken.
 
@@ -16,10 +16,10 @@ To build our database in DynamoDB we used the spreadsheet containing the informa
 
 ![alt text](https://user-images.githubusercontent.com/87722995/145469450-7b21b655-6284-4af3-8b7d-8d8543003e26.jpg)
 
-The flowchart below displays the full project design. A user utilizes one of two slash commands (elective or feedback) and the SlackBot sends the request to AWS AppRunner, which is set to deploy on push to this GitHub (hosted on an EC2 instance). AppRunner can then interact with the Dynamo DataBase. If the slash command “/elective” is called, the database is searched for relevant feedback on that specific elective, while if the slash command “/feedback” is called, AppRunner adds the student’s feedback to the DataBase as a new entry.
+The flowchart above displays the full project design. A user utilizes one of two slash commands (elective or feedback) and the SlackBot sends the request to AWS AppRunner, which is set to deploy on push to this GitHub (hosted on an EC2 instance). AppRunner can then interact with the Dynamo DataBase. If the slash command “/elective” is called, the database is searched for relevant feedback on that specific elective, while if the slash command “/feedback” is called, AppRunner adds the student’s feedback to the DataBase as a new entry.
 This project still has a few limitations that we hope to address with future work. For example, right now students must exactly specify the correct class name to access feedback. Future integration will focus on Slack “workflows” for users to have a more interactive and less error prone experience.
 
-
+This project still has a few limitations that we hope to address with future work. For example, right now students must exactly specify the correct class name to access feedback. Future integration will focus on Slack “workflows” for users to have a more interactive and less error prone experience.
 
 ___        ______     ____ _                 _  ___  
         / \ \      / / ___|   / ___| | ___  _   _  __| |/ _ \ 
