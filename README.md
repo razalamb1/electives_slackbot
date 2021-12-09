@@ -1,4 +1,7 @@
-         ___        ______     ____ _                 _  ___  
+![alt text] (https://github.com/clarissaache/magic_slackbot/blob/main/Flowchart%20-%20Final%20Project.jpg)
+
+
+___        ______     ____ _                 _  ___  
         / \ \      / / ___|   / ___| | ___  _   _  __| |/ _ \ 
        / _ \ \ /\ / /\___ \  | |   | |/ _ \| | | |/ _` | (_) |
       / ___ \ V  V /  ___) | | |___| | (_) | |_| | (_| |\__, |
