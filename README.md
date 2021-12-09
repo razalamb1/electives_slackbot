@@ -1,5 +1,5 @@
-![alt text] (https://github.com/clarissaache/magic_slackbot/blob/main/Flowchart%20-%20Final%20Project.jpg)
-
+![alt text] (https://user-images.githubusercontent.com/87722995/145469450-7b21b655-6284-4af3-8b7d-8d8543003e26.jpg)
+https://user-images.githubusercontent.com/87722995/145469450-7b21b655-6284-4af3-8b7d-8d8543003e26.jpg
 
 ___        ______     ____ _                 _  ___  
         / \ \      / / ___|   / ___| | ___  _   _  __| |/ _ \ 
