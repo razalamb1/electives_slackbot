@@ -1,5 +1,7 @@
 # Duke University Elective SlackBot
 
+## Authors: Clarissa Ache, Preet Khowja, Raza Lamb, Aarushi Verma
+
 ### Background and Motivation
 
 Duke’s Masters in Interdisciplinary Data Science (MIDS) is a relatively new 2 year-long graduate science program. One of the strengths of the program is the ability for students to take electives in any of Duke’s graduate schools. However, this leads to a somewhat predictable and simultaneously frustrating question: “What gosh-darn elective do I take??” As a solution, the program administrator has put together a Google Sheet for students to add courses they have taken and any relevant feedback. However, as visible below, this spreadsheet can be very difficult to use, as there’s no easy sort functionality, and students may enter classes with slightly different names.
